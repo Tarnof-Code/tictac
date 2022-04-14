@@ -1,26 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-// const mongoose = require('mongoose');
 
-// // useNewUrlParser ;)
-// var options = {
-//   connectTimeoutMS: 5000,
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true
-//  };
-
-// --------------------- BDD -----------------------------------------------------
-// mongoose.connect('mongodb+srv://XXXXXXXX:*********@XXXXXXXX-0hsfc.mongodb.net/Ticketac?retryWrites=true',
-//    options,
-//    function(err) {
-//     if (err) {
-//       console.log(`error, failed to connect to the database because --> ${err}`);
-//     } else {
-//       console.info('*** Database Ticketac connection : Success ***');
-//     }
-//    }
-// );
 
 // var journeySchema = mongoose.Schema({
 //   departure: String,
@@ -37,15 +18,17 @@ var router = express.Router();
 
 
 
-/* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
+// GET home page. 
+
 router.get('/', function(req, res, next) {
 
 
   res.render('login', { title: 'Login' });
 });
+
+
+
+
 
 
 // Remplissage de la base de donnée, une fois suffit

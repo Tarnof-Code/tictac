@@ -1,8 +1,20 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height:100vh;
 }
 
 a {
   color: #00B7FF;
+}
+
+.degradeColor {
+  background: linear-gradient( #d1dfe3,#539ed0);
+}
+
+.formArea {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  text-align: center;
 }

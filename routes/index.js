@@ -29,6 +29,11 @@ router.get('/', function(req, res, next) {
 
 
 
+router.get('/available', function(req, res, next) {
+
+  res.render('available', { title: 'dispo' });
+});
+
 router.get('/home', function(req, res, next) {
 
 

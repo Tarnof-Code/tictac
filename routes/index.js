@@ -42,7 +42,6 @@ router.get('/home', function(req, res, next) {
 
 
 
-
 router.post('/home', async function(req, res, next) {
 
   var departureDate=req.body.departureDate

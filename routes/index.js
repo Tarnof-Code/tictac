@@ -33,10 +33,44 @@ router.get('/home', function(req, res, next) {
 });
 
 
-router.get('/dispo', function(req, res, next) {
+router.get('/available', function(req, res, next) {
 
   res.render('available', { title: 'dispo' });
 });
+
+router.get('/home', function(req, res, next) {
+
+
+  res.render('home', { title: 'home' });
+});
+
+
+router.post('/home', async function(req, res, next) {
+
+  var departureDate=req.body.departureDate
+  var departureCity=req.body.departureCity
+  var arrivalCity=req.body.arrivalCity
+
+  var journey= await journeyModel.find({departure: departureCity, arrival: arrivalCity, date: departureDate})
+
+   if(journey.price){
+    
+    res.render('home', { title: 'Login' });
+  }else{
+    
+    res.render('unavailable')
+
+  }
+  
+});
+
+router.get('/error', function(req, res, next) {
+
+
+  res.render('unavailable', { title: 'Login' });
+});
+
+
 
 
 

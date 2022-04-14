@@ -33,6 +33,11 @@ router.get('/home', function(req, res, next) {
 });
 
 
+router.get('/dispo', function(req, res, next) {
+
+  res.render('available', { title: 'dispo' });
+});
+
 
 
 

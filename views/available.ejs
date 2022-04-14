@@ -22,15 +22,22 @@
 
             <div class="row">
                 <!-- Cards de trains dispos -->
-               
-                <div class="card col-10 col-md-7 mx-auto mt-2">
-                    <div class="card-body d-flex justify-content-between ">
-                        <h5 class="card-title mr-5 pt-1">Paris / Lille</h5>
-                        <p class="card-text mr-5 pt-2">train departure at: 15:00 pm</p>
-                        <a href="#" class="btn btn-danger content-right">OK</a>
+
+                <% for(var i=0; i<journeys.length;i++){
+                    var heure=journeys[i].departureTime.split(":")
+                    var period = parseInt(heure[0])<12?"am":"pm" %>
+
+                    
+                    <div class="card col-10 col-md-7 mx-auto mt-2">
+                        <div class="card-body d-flex justify-content-between ">
+                            <h5 class="card-title mr-5 pt-1"><%= journeys[i].departure+" / "+journeys[i].arrival %></h5>
+                            <p class="card-text mr-5 pt-2"><%= "train departure at: "+journeys[i].departureTime+" "+period %></p>
+                            <h5 class="card-text mr-5 pt-2"><%= journeys[i].price+" €" %></h5>
+                            <a href=<%="/tickets?id="+journeys[i]._id %> class="btn btn-danger content-right">OK</a>
+                        </div>
                     </div>
-                </div>
-                
+                    
+                <% } %>
                 
 
                 

@@ -30,23 +30,25 @@ router.post("/sign-up", async function (req, res) {
         name :userSaved.name, 
         id: userSaved._id
       }
+      req.session.basket=[]
     }
-
-
+    
+    
     res.redirect("/home");
   }
-
+  
 })
 
 router.post("/sign-in",async function(req,res) {
   let exist = await userModel.findOne({email: req.body.email, password: req.body.password })
   console.log("coucou" + exist)
-
+  
   if(exist) {
-     req.session.user = {
+    req.session.user = {
       name: exist.name,
       id: exist._id
-         }
+    }
+    req.session.basket=[]
     res.redirect("/home");
    
   } else {

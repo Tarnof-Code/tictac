@@ -1,8 +1,25 @@
 body {
-  padding: 50px;
+  padding: 0;
+  margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+
+.nav-content{
+
+  text-decoration: none;
+  color: black;
+
+}
+
+.on{
+  color: red;
+}
+
+.nav-content:hover{
+  text-decoration: underline;
 }

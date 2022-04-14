@@ -1,5 +1,7 @@
 var express = require('express');
+var mongoose=require('mongoose')
 var router = express.Router();
+var journeyModel=require('../models/journey')
 
 
 
@@ -13,8 +15,8 @@ var router = express.Router();
 
 // var journeyModel = mongoose.model('journey', journeySchema);
 
-// var city = ["Paris","Marseille","Nantes","Lyon","Rennes","Melun","Bordeaux","Lille"]
-// var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
+var city = ["Paris","Marseille","Nantes","Lyon","Rennes","Melun","Bordeaux","Lille"]
+var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
 
 
 
@@ -49,7 +51,7 @@ router.get('/home', function(req, res, next) {
 
 //     if(departureCity != arrivalCity){
 
-//       var newUser = new journeyModel ({
+//       var newUser = new journeyModel({
 //         departure: departureCity , 
 //         arrival: arrivalCity, 
 //         date: date[Math.floor(Math.random() * Math.floor(date.length))],
@@ -62,12 +64,12 @@ router.get('/home', function(req, res, next) {
 //     }
 
 //   }
-//   res.render('index', { title: 'Express' });
+//   res.render('login', { title: 'Express' });
 // });
 
 
 // // Cette route est juste une verification du Save.
-// // Vous pouvez choisir de la garder ou la supprimer.
+// // // Vous pouvez choisir de la garder ou la supprimer.
 // router.get('/result', function(req, res, next) {
 
 //   // Permet de savoir combien de trajets il y a par ville en base
@@ -85,7 +87,7 @@ router.get('/home', function(req, res, next) {
 //   }
 
 
-//   res.render('index', { title: 'Express' });
+//   res.render('login', { title: 'Express' });
 // });
 
 module.exports = router;

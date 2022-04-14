@@ -23,7 +23,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
 
 
-  res.render('login', { title: 'Login' });
+  res.render('home', { title: 'Login' });
 });
 
 

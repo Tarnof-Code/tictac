@@ -13,12 +13,10 @@
 </head>
 
 <body class="degradeColor">
-
-  
-
+<%- include('header') %>
 
 
-  <div class="home ">
+  <div class="home mt-5">
 
     <div class="row">
 
@@ -31,7 +29,7 @@
         <div class="formArea">
           <h4 class="titleForm text-light">Sign-in</h4>
 
-          <form action="/users/sign-up" method="POST">
+          <form action="/users/sign-in" method="POST">
             <div class="form-group">
               <input type="email" name="email" class="form-control" placeholder="Email">
             </div>
@@ -51,7 +49,7 @@
 
         <div class="formArea">
           <h4 class="titleForm text-light">Sign-up</h4>
-          <form action="/users/sign-in" method="POST">
+          <form action="/users/sign-up" method="POST">
             <div class="form-group">
               <input name="name" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Name">
             </div>

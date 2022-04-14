@@ -42,9 +42,10 @@ var router = express.Router();
 //   res.render('index', { title: 'Express' });
 // });
 router.get('/', function(req, res, next) {
-  res.render('home', { title: 'Express' });
-});
 
+
+  res.render('login', { title: 'Login' });
+});
 
 
 // Remplissage de la base de donnée, une fois suffit

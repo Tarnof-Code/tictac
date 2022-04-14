@@ -44,6 +44,12 @@ router.get('/home', function(req, res, next) {
   res.render('home', { title: 'home' });
 });
 
+router.get('/mylast_trip', function(req, res, next) {
+
+
+  res.render('mylast_trip', { title: 'mylast_trip' });
+});
+
 
 router.post('/home', async function(req, res, next) {
 

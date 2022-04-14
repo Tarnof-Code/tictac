@@ -8,9 +8,13 @@ router.get('/', function (req, res, next) {
 });
 
 router.post("/sign-up", async function (req, res) {
+ 
+    
   let exist = await userModel.findOne({ email: req.body.email })
+ 
   if (exist) {
-    res.render("login")
+    res.render("login" )
+    
   } else {
     let newUser = new userModel({
       name: req.body.name,
@@ -20,9 +24,44 @@ router.post("/sign-up", async function (req, res) {
     })
 
     let userSaved = await newUser.save()
+
+    if (userSaved && req.session.user == undefined) {
+      req.session.user = { 
+        name :userSaved.name, 
+        id: userSaved._id
+      }
+    }
+
+
     res.redirect("/home");
   }
 
+})
+
+router.post("/sign-in",async function(req,res) {
+  let exist = await userModel.findOne({email: req.body.email, password: req.body.password })
+  console.log("coucou" + exist)
+
+  if(exist) {
+     req.session.user = {
+      name: exist.name,
+      id: exist._id
+         }
+    res.redirect("/home");
+   
+  } else {
+    res.render("login");
+  
+  }
+
+  // if(exist){
+  //   req.session.user = {
+  //     username: exist.name,
+  //     id: exist._id
+      
+  //   }
+  // }
+  
 })
 
 module.exports = router;

@@ -2,11 +2,7 @@ var express = require('express');
 var router = express.Router();
 var userModel = require("../models/users");
 
-const dotenv = require("dotenv");
-dotenv.config();
 
-const BDD_LOGIN = process.env.BDD_LOGIN;
-const BDD_PASSWORD = process.env.BDD_PASSWORD;
 
 
 /* GET users listing. */

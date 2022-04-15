@@ -3,6 +3,12 @@ var mongoose = require('mongoose')
 var router = express.Router();
 var journeyModel = require('../models/journey')
 
+const dotenv = require("dotenv");
+dotenv.config();
+
+const BDD_LOGIN = process.env.BDD_LOGIN;
+const BDD_PASSWORD = process.env.BDD_PASSWORD;
+
 
 
 // var journeySchema = mongoose.Schema({

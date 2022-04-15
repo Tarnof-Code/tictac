@@ -42,24 +42,15 @@
                         </tr>
                     </thead>
                     <tbody>
+
+                        <% for(let i=0;i< trip.length; i++){ %>
                         <tr>
-                            <th style="LINE-HEIGHT:30px " scope="row">02/08/2019</th>
-                            <td>Paris / Lille</td>
-                            <td>16:00</td>
-                            <td>93€</td>
+                            <th style="LINE-HEIGHT:30px " scope="row"><%= formatDate(trip[i].date) %></th>
+                            <td><%= trip[i].departure+" / "+trip[i].arrival %></td>
+                            <td><%= trip[i].departureTime %></td>
+                            <td><%= trip[i].price %></td>
                         </tr>
-                        <tr>
-                            <th style="LINE-HEIGHT:30px" scope="row">02/08/2019</th>
-                            <td>Paris / Lille</td>
-                            <td>16:00</td>
-                            <td>93€</td>
-                        </tr>
-                        <tr>
-                            <th style="LINE-HEIGHT:30px" scope="row">02/08/2019</th>
-                            <td>Paris / Lille</td>
-                            <td>16:00</td>
-                            <td>93€</td>
-                        </tr>
+                  <% } %>
                     </tbody>
                 </table>
 

@@ -50,9 +50,11 @@ router.get('/home', function (req, res, next) {
 });
 
 // Last Trips Page
-router.get('/mylast_trip', function (req, res, next) {
+router.get('/mylast_trip',async function (req, res, next) {
   if (req.session.user) {
-  res.render('mylast_trip', { title: 'mylast_trip' })
+    let userTravel = await userModel.findById(req.session.user.id)
+   
+  res.render('mylast_trip', { title: 'mylast_trip', trip: userTravel.passTravels })
 } else {
   res.redirect("/")
 }

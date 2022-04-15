@@ -40,13 +40,6 @@ router.get('/home', function(req, res, next) {
   res.render('home', { title: 'home' });
 });
 
-router.get('/mylast_trip', function(req, res, next) {
-  res.render('mylast_trip', { title: 'mylast_trip' })
-});
-
-router.get('/tickets', function(req, res, next) {
-  res.render('tickets', { title: 'tickets' });
-});
 
 
 router.post('/home', async function(req, res, next) {
@@ -57,14 +50,31 @@ router.post('/home', async function(req, res, next) {
 
   var journey= await journeyModel.find({departure: departureCity, arrival: arrivalCity, date: departureDate})
 
-  console.log()
+  req.session.journey=journey
+  
    if(journey.length==0){
      res.render('unavailable')
   }else{
-    res.render('home', { title: 'search',journeys:journey });
+    res.render('available', { title: 'search',journeys:journey });
 
   }
   
+});
+
+router.get('/tickets', async function(req, res, next) {
+
+  var id=req.query.id
+  if(req.session.basket===undefined){
+    req.session.basket=[]
+  }
+  
+  var journey= await journeyModel.findById(id)
+  req.session.basket.push(journey)
+
+  
+   
+
+  res.render('tickets', { title: 'tickets' });
 });
 
 router.get('/error', function(req, res, next) {

@@ -1,7 +1,9 @@
 var express = require('express');
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
+//const { updateOne } = require('../models/journey');
 var router = express.Router();
-var journeyModel = require('../models/journey')
+var journeyModel = require('../models/journey');
+const userModel = require('../models/users');
 
 
 
@@ -88,7 +90,7 @@ router.post('/home', async function (req, res, next) {
 
   var journey = await journeyModel.find({ departure: departureCity, arrival: arrivalCity, date: departureDate })
 
-  console.log(journey)
+
   if (journey.length == 0) {
     res.render('unavailable')
   } else {
@@ -105,6 +107,30 @@ router.get('/error', function (req, res, next) {
 } else {
   res.redirect("/")
 }
+});
+router.get('/save_trip',async function (req, res, next) {
+
+  var basket=req.session.basket
+  var user=req.session.user
+  var passTravel=[]
+
+  var user= await userModel.findById({_id: user.id})
+  for(item of basket){
+    user.passTravels.push({
+      departure: item.departure,
+      arrival: item.arrival,
+      departureTime: item.departureTime,
+      price: item.price,
+      date: item.date
+
+    })
+  }
+
+     await user.save()
+
+  req.session.basket=[]
+
+  res.redirect('/home')
 });
 
 

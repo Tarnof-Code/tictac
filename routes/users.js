@@ -41,7 +41,7 @@ router.post("/sign-up", async function (req, res) {
 
 router.post("/sign-in",async function(req,res) {
   let exist = await userModel.findOne({email: req.body.email, password: req.body.password })
-  console.log("coucou" + exist)
+
   
   if(exist) {
     req.session.user = {

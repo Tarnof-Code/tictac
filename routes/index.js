@@ -1,7 +1,9 @@
 var express = require('express');
-var mongoose=require('mongoose')
+var mongoose = require('mongoose')
 var router = express.Router();
-var journeyModel=require('../models/journey')
+var journeyModel = require('../models/journey')
+
+
 
 
 
@@ -15,82 +17,94 @@ var journeyModel=require('../models/journey')
 
 // var journeyModel = mongoose.model('journey', journeySchema);
 
-var city = ["Paris","Marseille","Nantes","Lyon","Rennes","Melun","Bordeaux","Lille"]
-var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
+var city = ["Paris", "Marseille", "Nantes", "Lyon", "Rennes", "Melun", "Bordeaux", "Lille"]
+var date = ["2018-11-20", "2018-11-21", "2018-11-22", "2018-11-23", "2018-11-24"]
 
 
 
-// GET home page. 
-
-router.get('/', function(req, res, next) {
-
+// Login page
+router.get('/', function (req, res, next) {
   res.render('login', { title: 'Login' });
 });
 
 
-
-router.get('/available', function(req, res, next) {
-
+// Available page
+router.get('/available', function (req, res, next) {
+  if (req.session.user) {
   res.render('available', { title: 'dispo' });
+} else {
+  res.redirect("/")
+}
 });
 
-router.get('/home', function(req, res, next) {
-
-
-  res.render('home', { title: 'home' });
-});
-
-
-
-router.post('/home', async function(req, res, next) {
-
-  var departureDate=req.body.departureDate
-  var departureCity=req.body.departureCity
-  var arrivalCity=req.body.arrivalCity
-
-  var journey= await journeyModel.find({departure: departureCity, arrival: arrivalCity, date: departureDate})
-
-  req.session.journey=journey
-
-  console.log(journey)
-  
-   if(journey.length==0){
-     res.render('unavailable')
-  }else{
-    res.render('available', { title: 'search',journeys:journey });
-
+// Home Page
+router.get('/home', function (req, res, next) {
+  if (req.session.user) {
+    res.render('home', { title: 'home' });
+  } else {
+    res.redirect("/")
   }
-  
+
 });
 
-router.get('/tickets', async function(req, res, next) {
-
-  var id=req.query.id
-  if(req.session.basket===undefined){
-    req.session.basket=[]
-  }
-  
-  var journey= await journeyModel.findById(id)
-  req.session.basket.push(journey)
-
-  res.redirect('/tickets-display')
-
-  
+// Last Trips Page
+router.get('/mylast_trip', function (req, res, next) {
+  if (req.session.user) {
+  res.render('mylast_trip', { title: 'mylast_trip' })
+} else {
+  res.redirect("/")
+}
 });
 
-router.get('/tickets-display', async function(req, res, next) {
 
+// Tickets Page
+router.get('/tickets', async function (req, res, next) {
+  if (req.session.user) {
+    var id=req.query.id
 
+    var journey= await journeyModel.findById(id)
+
+    req.session.basket.push(journey)
+
+    res.redirect("/tickets-display")
+
+  
+} else {
+  res.redirect("/")
+}
+});
+
+router.get('/tickets-display', async function (req, res, next) {
 
   res.render('tickets', { title: 'tickets', basket:req.session.basket });
 });
 
+// Saisie du choix
+router.post('/home', async function (req, res, next) {
 
+  var departureDate = req.body.departureDate
+  var departureCity = req.body.departureCity
+  var arrivalCity = req.body.arrivalCity
 
-router.get('/error', function(req, res, next) {
+  var journey = await journeyModel.find({ departure: departureCity, arrival: arrivalCity, date: departureDate })
 
+  console.log(journey)
+  if (journey.length == 0) {
+    res.render('unavailable')
+  } else {
+    res.render('available', { title: 'search', journeys: journey });
 
+  }
+
+});
+
+// Error
+router.get('/error', function (req, res, next) {
+  if (req.session.user) {
   res.render('unavailable', { title: 'Login' });
+} else {
+  res.redirect("/")
+}
 });
 
 
@@ -120,7 +134,7 @@ router.get('/error', function(req, res, next) {
 //         departureTime:Math.floor(Math.random() * Math.floor(23)) + ":00",
 //         price: Math.floor(Math.random() * Math.floor(125)) + 25,
 //       });
-       
+
 //        await newUser.save();
 
 //     }
@@ -139,7 +153,7 @@ router.get('/error', function(req, res, next) {
 
 //     journeyModel.find( 
 //       { departure: city[i] } , //filtre
-  
+
 //       function (err, journey) {
 
 //           console.log(`Nombre de trajets au départ de ${journey[0].departure} : `, journey.length);

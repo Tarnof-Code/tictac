@@ -42,12 +42,14 @@
                 <tbody class="table-light ">
                     <% 
                     let total=0
-                    for(item of basket){ %>
+                    for(item of basket){ 
+                        var heure=item.departureTime.split(":")
+                        var period = parseInt(heure[0])<12?"am":"pm"%>
                     <tr>
                         <th scope="row"><%= basket.indexOf(item)+1 %></th>
                         <td><%= item.departure+" / "+item.arrival %></td>
                         <td><%= formatDate(item.date) %></td> 
-                        <td>15:00 pm</td>
+                        <td><%= "train departure at: "+item.departureTime+" "+period %></td> 
                         <td><%= item.price+" €" %></td>
                     </tr>
                     <%
@@ -64,7 +66,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= total +" € salut" %></td>
+                    <td><%= total +" €" %></td>
                 </tfoot>
             </table>
               

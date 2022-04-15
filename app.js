@@ -10,6 +10,12 @@ var usersRouter = require('./routes/users');
 var usersRouter = require('./routes/users');
 var session = require("express-session");
 var app = express();
+
+app.locals.formatDate=function(date){
+  let newDate= new Date(date)
+
+  return newDate.toLocaleDateString()
+}
 app.use(
   session({
    secret: 'a4f8071f-c873-4447-8ee2',

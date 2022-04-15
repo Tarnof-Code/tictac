@@ -51,6 +51,8 @@ router.post('/home', async function(req, res, next) {
   var journey= await journeyModel.find({departure: departureCity, arrival: arrivalCity, date: departureDate})
 
   req.session.journey=journey
+
+  console.log(journey)
   
    if(journey.length==0){
      res.render('unavailable')
@@ -71,11 +73,19 @@ router.get('/tickets', async function(req, res, next) {
   var journey= await journeyModel.findById(id)
   req.session.basket.push(journey)
 
-  
-   
+  res.redirect('/tickets-display')
 
-  res.render('tickets', { title: 'tickets' });
+  
 });
+
+router.get('/tickets-display', async function(req, res, next) {
+
+
+
+  res.render('tickets', { title: 'tickets', basket:req.session.basket });
+});
+
+
 
 router.get('/error', function(req, res, next) {
 
